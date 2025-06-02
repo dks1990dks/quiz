@@ -74,4 +74,63 @@ body{
 .incorrect{
     background:red;
 }
+/* Container for the category selector */
+#category-select {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #f0f4f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+#category-select h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+/* Dropdown style */
+#category-dropdown {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  outline: none;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+#category-dropdown:focus {
+  border-color: #0056b3;
+}
+
+/* Start button style */
+#start-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-weight: 600;
+}
+
+#start-btn:hover {
+  background-color: #0056b3;
+}
+
+#start-btn:active {
+  background-color: #003d80;
+}
+
 
