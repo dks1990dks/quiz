@@ -1,93 +1,94 @@
-const questionElement= document.getElementById(`question`)
-const answerButton = document.getElementById(`answer-button`)
-const nextButton = document.getElementById(`next-btn`)
+const questionElement = document.getElementById('question');
+const answerButton = document.getElementById('answer-button');
+const nextButton = document.getElementById('next-btn');
+const startButton = document.getElementById('start-btn');
+const categoryDropdown = document.getElementById('category-dropdown');
+const quizDiv = document.querySelector('.quiz');
 
 let currentQuestionIndex = 0;
-let score = 0
+let score = 0;
+let questions = [];
+
+startButton.addEventListener('click', () => {
+    const selectedCategory = categoryDropdown.value;
+    if (!selectedCategory) {
+        alert("Please select a subject.");
+        return;
+    }
+    questions = quizData[selectedCategory]; // quizData comes from quiz_data.js
+    document.getElementById('category-select').style.display = 'none';
+    quizDiv.style.display = 'block';
+    startQuiz();
+});
 
 function startQuiz() {
-    resetState()
-    currentQuestionIndex = 0
-    score = 0
-    nextButton.style.display = `none`
-    showQuestionAnswer()
+    currentQuestionIndex = 0;
+    score = 0;
+    nextButton.innerHTML = "Next";
+    showQuestionAnswer();
 }
 
 function showQuestionAnswer() {
-    let currentQuestion = questions[currentQuestionIndex]
-    let questionNo = currentQuestionIndex+1;
-    questionElement.innerHTML = `${questionNo}. ${currentQuestion.question}`
-    currentQuestion.answers.forEach(answer =>{
-        let button = document.createElement(`button`)
-        button.classList.add(`btn`)
-        button.innerHTML = answer.text
-        answerButton.appendChild(button)
+    resetState();
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = `${questionNo}. ${currentQuestion.question}`;
+    currentQuestion.answers.forEach(answer => {
+        let button = document.createElement('button');
+        button.classList.add('btn');
+        button.innerHTML = answer.text;
         if (answer.correct) {
-            button.dataset.correct = answer.correct
+            button.dataset.correct = answer.correct;
         }
-        button.addEventListener(`click`,selectedAnswer)
-    })
-
+        button.addEventListener('click', selectedAnswer);
+        answerButton.appendChild(button);
+    });
 }
 
 function resetState() {
-    nextButton.style.display = `none`
+    nextButton.style.display = 'none';
     while (answerButton.firstChild) {
-        answerButton.removeChild(answerButton.firstChild)
+        answerButton.removeChild(answerButton.firstChild);
     }
 }
 
 function selectedAnswer(e) {
-    let selelctedButton = e.target;
-    let isCorrect = selelctedButton.dataset.correct ===`true`
+    const selectedButton = e.target;
+    const isCorrect = selectedButton.dataset.correct === 'true';
 
     if (isCorrect) {
-        selelctedButton.classList.add(`correct`)
-        score++
+        selectedButton.classList.add('correct');
+        score++;
     } else {
-        selelctedButton.classList.add(`incorrect`)
+        selectedButton.classList.add('incorrect');
     }
-    Array.from(answerButton.children).forEach(button =>{
-        if (button.dataset.correct ===`true`) {
-            button.classList.add(`correct`)
+
+    Array.from(answerButton.children).forEach(button => {
+        if (button.dataset.correct === 'true') {
+            button.classList.add('correct');
         }
-        button.disabled = true
-    })
-    nextButton.style.display =`block`
+        button.disabled = true;
+    });
+
+    nextButton.style.display = 'block';
 }
 
 function showScore() {
-   
-    questionElement.innerHTML = `You Scored ${score} out of ${questions.length}`
-    nextButton.innerHTML = `Play Again`
-    nextButton.style.display = `block`
-
+    resetState();
+    questionElement.innerHTML = `🎉 You scored ${score} out of ${questions.length}`;
+    nextButton.innerHTML = 'Play Again';
+    nextButton.style.display = 'block';
 }
 
-
-nextButton.addEventListener(`click`,()=>{
-    if (currentQuestionIndex < questions.length) {
-        nexthuttonHandler()
-    }else{
-        startQuiz()
+nextButton.addEventListener('click', () => {
+    if (currentQuestionIndex < questions.length - 1) {
+        nextQuestionHandler();
+    } else {
+        showScore();
     }
-`   `
-})
+});
 
-
-function nexthuttonHandler() {
-     resetState()
-    currentQuestionIndex++
-    if (currentQuestionIndex<questions.length) {
-        showQuestionAnswer()
-    }else{
-        showScore()
-        
-    }
-
+function nextQuestionHandler() {
+    currentQuestionIndex++;
+    showQuestionAnswer();
 }
-
-
-
-
-startQuiz()
