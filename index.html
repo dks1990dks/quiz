@@ -8,20 +8,41 @@
 </head>
 <body>
     <div class="app">
-        <h1>Simple Quiz</h1>
-        <div class="quiz">
-            <h2 id="question" >Question goes here</h2>
+        <h1>Simple Quiz App</h1>
+
+        <!-- Question Group Selector -->
+        <div id="category-select">
+            <h2>Select a Subject:</h2>
+            <select id="category-dropdown">
+                <option value="" disabled selected>Select Subject</option>
+                <option value="gk">General Knowledge</option>
+                <option value="math">Mathematics</option>
+                <option value="english">English</option>
+                <option value="science">Science</option>
+                <option value="social">Social Science</option>
+                <option value="computer">Computer</option>
+                <option value="history">History</option>
+                <option value="sanskrit">Sanskrit</option>
+                <option value="gujarati">Gujarati</option>
+                <option value="hindi">Hindi</option>
+            </select>
+            <button id="start-btn">Start Quiz</button>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz" style="display:none;">
+            <h2 id="question">Question goes here</h2>
             <div id="answer-button">
-                <button class="btn">Answer 1 </button>
-                <button class="btn">Answer 2 </button>
-                <button class="btn">Answer 3 </button>
-                <button class="btn">Answer 4  </button>
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
             </div>
             <button id="next-btn">Next</button>
         </div>
     </div>
-    <script src="indian_states_capitals_quiz.js"></script>
+
+    <script src="quiz_data.js"></script> <!-- Contains all grouped questions -->
     <script src="app.js"></script>
-   
 </body>
 </html>
